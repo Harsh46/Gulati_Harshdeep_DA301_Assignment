@@ -29,3 +29,10 @@ Cluster 0 appears to be the largest as it can be seen as the typical (average) c
 Hence, it may be best to focuse mostly on customers that fit within cluster 0 and also those who tend to have a higher remuneration score if the goal is to target the highest numbers of customers.
 
 Exploring further, I would look at if there was a 3rd factor moderating this clustering that could explain it.
+
+
+## Assignment 3 insights and summaries:
+
+The results of this analysis show what the most frequent words are within the reviews and summaries, as their sentiments. The histograms show a generally positive sentiment for both reviews and summaries with reviews especially having a higher frequency of results scoring positively for polarity. Summaries were also positive however a much larger number were neutral in sentiment. The frequency of the most common words combined with the results of sentiment analysis seem to suggest that the games made by Turtle Games are especially appealing to children and make great gifts. However, the negative sentiments suggest that the game has a tendency to be "dissapointing" or "boring" for some players.
+
+However, accuracy for results can vary for word clouds, sentiment analysis and subjectivity. This potential lack of accuracy should be taken into consideration, meaning the results of this analysis are potentially more suited as supplimentary results to support other results from more numerical methods.
