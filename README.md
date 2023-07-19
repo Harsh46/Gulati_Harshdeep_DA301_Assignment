@@ -42,3 +42,8 @@ However, accuracy for results can vary for word clouds, sentiment analysis and s
 The visualisations show that most games tend to bring between USD 0 and 5 million in sales. NA tends to be a stronger performer than EU in terms of sales. Global sales seems to be a little too smooth of a scatterplot however. 
 
 The boxplots for NA sales seem to show a preference for older consoles like the NES and GB as compared to the EU sales. Both show strong sales for Wii games. Global sales reflect this with Wii, NES, GB, and DS showing especially good sales.
+
+## Assignment 5 insights and summaries:
+The Histograms and Boxplots both show a very positively skewed and leptokurtic distribution for all three sales variables. This is reflected within their values for skewness and kurtosis. The Shapiro-Wilk test is <0.05 for all three sales variables showing that they are not normally distributed. After testing the impact of removing outliers, it was found that they did not impact the end result of the analysis nor the outcomes of the aforementioned tests. So, the outliers were left in the dataset.
+
+The correlation shows a strong to very strong positive correlation between the sales variables especially between NA and Global sales. This suggests that NA sales potentially has a greater impact on the outcome of Global sales compared to EU sales. EU and NA sales also had positive correlation.
