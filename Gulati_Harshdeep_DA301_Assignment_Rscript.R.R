@@ -166,13 +166,23 @@ qplot(Global_Sales, Platform, data=turtle_sales2, geom='boxplot')
 # 1. Load and explore the data
 
 # View data frame created in Week 4.
-
+view(turtle_sales2)
 
 # Check output: Determine the min, max, and mean values.
+min(turtle_sales2$NA_Sales)
+min(turtle_sales2$EU_Sales)
+min(turtle_sales2$Global_Sales)
 
+max(turtle_sales2$NA_Sales)
+max(turtle_sales2$EU_Sales)
+max(turtle_sales2$Global_Sales)
+
+mean(turtle_sales2$NA_Sales)
+mean(turtle_sales2$EU_Sales)
+mean(turtle_sales2$Global_Sales)
 
 # View the descriptive statistics.
-
+summary(turtle_sales2)
 
 ###############################################################################
 
@@ -180,23 +190,56 @@ qplot(Global_Sales, Platform, data=turtle_sales2, geom='boxplot')
 
 ## 2a) Use the group_by and aggregate functions.
 # Group data based on Product and determine the sum per Product.
+df_sales <- turtle_sales2 %>% group_by(Product) %>%
+  summarise(sum_NA_Sales=round(sum(NA_Sales),2),
+            sum_EU_Sales=round(sum(EU_Sales),2),
+            sum_Global_Sales=round(sum(Global_Sales),2),
+            .groups='drop')
 
+#View the results.
+df_sales
 
 # View the data frame.
-
+view(df_sales)
 
 # Explore the data frame.
-
+summary(df_sales)
 
 
 ## 2b) Determine which plot is the best to compare game sales.
 # Create scatterplots.
+# Scatterplot for NA_Sales.
+qplot(Product, sum_NA_Sales, data=df_sales)
+
+# Scatterplot for EU_Sales.
+qplot(Product, sum_EU_Sales, data=df_sales)
+
+# Scatterplot for Global_Sales.
+qplot(Product, sum_Global_Sales, data=df_sales)
+
 
 
 # Create histograms.
+# Histogram for NA_Sales.
+qplot(sum_NA_Sales, data=df_sales)
+
+# Histogram for EU_Sales.
+qplot(sum_EU_Sales, data=df_sales)
+
+# Histogram for Global_Sales.
+qplot(sum_Global_Sales, data=df_sales)
 
 
 # Create boxplots.
+# Boxplot for NA_Sales.
+qplot(Product, sum_NA_Sales, data=df_sales, geom='boxplot')
+
+# Boxplot for EU_Sales.
+qplot(Product, sum_EU_Sales, data=df_sales, geom='boxplot')
+
+# Boxplot for Global_Sales.
+qplot(Product, sum_Global_Sales, data=df_sales, geom='boxplot')
+
 
 
 ###############################################################################
@@ -206,25 +249,155 @@ qplot(Global_Sales, Platform, data=turtle_sales2, geom='boxplot')
 
 ## 3a) Create Q-Q Plots
 # Create Q-Q Plots.
+# Q-Q Plot for NA_Sales.
+qqnorm(df_sales$sum_NA_Sales)
+qqline(df_sales$sum_NA_Sales)
 
+# Q-Q Plot for EU_Sales.
+qqnorm(df_sales$sum_EU_Sales)
+qqline(df_sales$sum_EU_Sales)
+
+# Q-Q Plot for Global_Sales.
+qqnorm(df_sales$sum_Global_Sales)
+qqline(df_sales$sum_Global_Sales)
 
 
 ## 3b) Perform Shapiro-Wilk test
 # Install and import Moments.
-
+library(moments)
 
 # Perform Shapiro-Wilk test.
+# Shapiro-Wilk test for NA_Sales.
+shapiro.test((df_sales$sum_NA_Sales))
+# p-value is <0.05,so the data is not normally distributed.
 
+# Shapiro-Wilk test for EU_Sales
+shapiro.test((df_sales$sum_EU_Sales))
+# p-value is <0.05,so the data is not normally distributed.
+
+# Shapiro-Wilk test for Global_Sales.
+shapiro.test((df_sales$sum_Global_Sales))
+# p-value is <0.05,so the data is not normally distributed.
 
 
 ## 3c) Determine Skewness and Kurtosis
 # Skewness and Kurtosis.
+# Skewness for NA_Sales.
+skewness(df_sales$sum_NA_Sales)
+# Output suggests a positive skewness.
+# Kurtosis for NA_Sales
+kurtosis(df_sales$sum_NA_Sales)
+# Kurtosis value is more than 3, suggesting our data is leptokurtic.
 
+# Skewness for EU_Sales.
+skewness(df_sales$sum_EU_Sales)
+# Output suggests a positive skewness.
+# Kurtosis for EU_Sales
+kurtosis(df_sales$sum_EU_Sales)
+# Kurtosis value is more than 3, suggesting our data is leptokurtic.
 
+# Skewness for Global_Sales.
+skewness(df_sales$sum_Global_Sales)
+# Output suggests a positive skewness.
+# Kurtosis for Global_Sales
+kurtosis(df_sales$sum_Global_Sales)
+# Kurtosis value is more than 3, suggesting our data is leptokurtic.
 
 ## 3d) Determine correlation
 # Determine correlation.
+round (cor(df_sales),
+       digits=2)
+##############################################################
 
+# EXTRA: Remove Outliers
+Q_NA <- quantile(df_sales$sum_NA_Sales, probs=c(.25, .75), na.rm = FALSE)
+iqr_NA <- IQR(df_sales$sum_NA_Sales)
+
+Q_NA[2]+1.5*iqr_NA # Upper Range.  
+Q_NA[1]-1.5*iqr_NA # Lower Range.
+
+
+Q_EU <- quantile(df_sales$sum_EU_Sales, probs=c(.25, .75), na.rm = FALSE)
+iqr_EU <- IQR(df_sales$sum_EU_Sales)
+
+Q_EU[2]+1.5*iqr_EU # Upper Range.  
+Q_EU[1]-1.5*iqr_EU # Lower Range.
+
+
+Q_Global <- quantile(df_sales$sum_Global_Sales, probs=c(.25, .75), na.rm = FALSE)
+iqr_Global <- IQR(df_sales$sum_Global_Sales)
+
+Q_Global[2]+1.5*iqr_Global # Upper Range.  
+Q_Global[1]-1.5*iqr_Global # Lower Range.
+
+filt_df_sales <- filter(df_sales, sum_NA_Sales<10.1825
+                        | sum_EU_Sales<7.8725
+                        | sum_Global_Sales<23.69)
+
+# Create boxplots.
+# Boxplot for NA_Sales.
+qplot(Product, sum_NA_Sales, data=filt_df_sales, geom='boxplot')
+
+# Boxplot for EU_Sales.
+qplot(Product, sum_EU_Sales, data=filt_df_sales, geom='boxplot')
+
+# Boxplot for Global_Sales.
+qplot(Product, sum_Global_Sales, data=filt_df_sales, geom='boxplot')
+
+# Create Q-Q Plots.
+# Q-Q Plot for NA_Sales.
+qqnorm(filt_df_sales$sum_NA_Sales)
+qqline(filt_df_sales$sum_NA_Sales)
+
+# Q-Q Plot for EU_Sales.
+qqnorm(filt_df_sales$sum_EU_Sales)
+qqline(filt_df_sales$sum_EU_Sales)
+
+# Q-Q Plot for Global_Sales.
+qqnorm(filt_df_sales$sum_Global_Sales)
+qqline(filt_df_sales$sum_Global_Sales)
+
+
+# Perform Shapiro-Wilk test.
+# Shapiro-Wilk test for NA_Sales.
+shapiro.test((filt_df_sales$sum_NA_Sales))
+# p-value is <0.05,so the data is not normally distributed.
+
+# Shapiro-Wilk test for EU_Sales
+shapiro.test((filt_df_sales$sum_EU_Sales))
+# p-value is <0.05,so the data is not normally distributed.
+
+# Shapiro-Wilk test for Global_Sales.
+shapiro.test((filt_df_sales$sum_Global_Sales))
+# p-value is <0.05,so the data is not normally distributed.
+
+
+# Skewness and Kurtosis.
+# Skewness for NA_Sales.
+skewness(filt_df_sales$sum_NA_Sales)
+# Output suggests a positive skewness.
+# Kurtosis for NA_Sales
+kurtosis(filt_df_sales$sum_NA_Sales)
+# Kurtosis value is more than 3, suggesting our data is leptokurtic.
+
+# Skewness for EU_Sales.
+skewness(filt_df_sales$sum_EU_Sales)
+# Output suggests a positive skewness.
+# Kurtosis for EU_Sales
+kurtosis(filt_df_sales$sum_EU_Sales)
+# Kurtosis value is more than 3, suggesting our data is leptokurtic.
+
+# Skewness for Global_Sales.
+skewness(filt_df_sales$sum_Global_Sales)
+# Output suggests a positive skewness.
+# Kurtosis for Global_Sales
+kurtosis(filt_df_sales$sum_Global_Sales)
+# Kurtosis value is more than 3, suggesting our data is leptokurtic.
+
+
+# Determine correlation.
+round (cor(filt_df_sales),
+       digits=2)
 
 ###############################################################################
 
@@ -233,13 +406,90 @@ qplot(Global_Sales, Platform, data=turtle_sales2, geom='boxplot')
 # Choose the type of plot you think best suits the data set and what you want 
 # to investigate. Explain your answer in your report.
 
+# Scatterplot to indicate relation between sales in NA and globally
+ggplot(data = df_sales,
+       mapping = aes(x = sum_NA_Sales, y = sum_Global_Sales,)) +  
+  
+  # Remove the colour argument.
+  geom_point(alpha = 0.5, size = 1.5) +  
+  
+  #Add lines of best fit, remove the confidence intervals,
+  # and set the size.
+  geom_smooth(method = 'lm',
+              se = FALSE,
+              size = 1.0) +
+  
+# Add labels for axis, title and caption.
+labs(y = "Sum of Global Sales",
+     x = "Sum of NA Sales",
+     title = "Correlation Between Sales Globally and in NA",
+     caption = "Source: Turtle Games") 
+
+
+# Scatterplot to indicate relation between sales in NA and globally
+ggplot(data = df_sales,
+       mapping = aes(x = sum_EU_Sales, y = sum_Global_Sales,)) +  
+  
+  # Remove the colour argument.
+  geom_point(alpha = 0.5, size = 1.5) +  
+  
+  #Add lines of best fit, remove the confidence intervals,
+  # and set the size.
+  geom_smooth(method = 'lm',
+              se = FALSE,
+              size = 1.0) +
+  
+  # Add labels for axis, title and caption.
+  labs(y = "Sum of Global Sales",
+       x = "Sum of EU Sales",
+       title = "Correlation Between Sales Globally and in the EU",
+       caption = "Source: Turtle Games") 
+
+
+
+# Scatterplot to indicate relation between sales in NA and globally
+ggplot(data = df_sales,
+       mapping = aes(x = sum_NA_Sales, y = sum_EU_Sales,)) +  
+  
+  # Remove the colour argument.
+  geom_point(alpha = 0.5, size = 1.5) +  
+  
+  #Add lines of best fit, remove the confidence intervals,
+  # and set the size.
+  geom_smooth(method = 'lm',
+              se = FALSE,
+              size = 1.0) +
+  
+  # Add labels for axis, title and caption.
+  labs(y = "Sum of Global Sales",
+       x = "Sum of NA Sales",
+       title = "Correlation Between Sales in the EU and in NA",
+       caption = "Source: Turtle Games") 
 
 ###############################################################################
 
 # 5. Observations and insights
 # Your observations and insights here...
+##The Histograms and Boxplots both show a very positively skewed and leptokurtic
+##distribution for all three sales variables. This is reflected within their
+##values for skewness and kurtosis. The Shapiro-Wilk test is <0.05 for all three
+##sales variables showing that they are not normally distributed. After testing
+##The impact of removing outliers, it was found that they did not impact the end
+##result of the analysis nor the outcomes of the aforementioned tests. So, the
+##outliers were left in the dataset.
 
+##The correlation shows a strong to very strong positive correlation between
+##the sales variables especially between NA and Global sales. This suggests
+##that NA sales potentially has a greater impact on the outcome of Global sales
+##compared to EU sales. It is reasonable to assume that NA sales are more likely
+## to have an impact on Global sales than the other way around since NA sales is
+##a component of Global sales.EU and NA sales also had positive correlation.
 
+##Correlations:
+
+##NA - Global: 0.92 
+##EU - Global: 0.85 
+##EU - NA: 0.62
 
 ###############################################################################
 ###############################################################################
