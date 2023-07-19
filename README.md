@@ -46,4 +46,10 @@ The boxplots for NA sales seem to show a preference for older consoles like the 
 ## Assignment 5 insights and summaries:
 The Histograms and Boxplots both show a very positively skewed and leptokurtic distribution for all three sales variables. This is reflected within their values for skewness and kurtosis. The Shapiro-Wilk test is <0.05 for all three sales variables showing that they are not normally distributed. After testing the impact of removing outliers, it was found that they did not impact the end result of the analysis nor the outcomes of the aforementioned tests. So, the outliers were left in the dataset.
 
-The correlation shows a strong to very strong positive correlation between the sales variables especially between NA and Global sales. This suggests that NA sales potentially has a greater impact on the outcome of Global sales compared to EU sales. EU and NA sales also had positive correlation.
+The correlation shows a strong to very strong positive correlation between the sales variables especially between NA and Global sales. This suggests that NA sales potentially has a greater impact on the outcome of Global sales compared to EU sales. It is reasonable to assume that NA sales are more likely to have an impact on Global sales than the other way around since NA sales is a component of Global sales. EU and NA sales also had positive correlation.
+
+Correlations:
+
+NA - Global: 0.92 \
+EU - Global: 0.85 \
+EU - NA: 0.62
