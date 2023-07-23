@@ -15,7 +15,7 @@ The coefficient value of 33.0617 tells us that as remuneration increases by 1, t
 Insignificant evidence to suggest relationship between age and loyalty (p>0.05), CI had 0.
 
 *Created Multiple Regression model with spending_score and remuneration using MLR:*\
-Significant evidence to suggest relationship between remuneration and loyalty (p<0.05), CI did not have 0.\
+Significant evidence to suggest relationship between spending, remuneration and loyalty (p<0.05), CI did not have 0.\
 Adjusted R-Squared tells us that the MLR model of multiple regression explains 82.3% of the variance.\
 There is insignificant evidence to suggest multicollinearity
 
