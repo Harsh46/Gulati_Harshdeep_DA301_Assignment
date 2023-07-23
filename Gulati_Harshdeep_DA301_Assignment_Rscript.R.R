@@ -63,7 +63,8 @@ print(turtle_sales)
 
 # Create a new data frame from a subset of the sales data frame.
 # Remove unnecessary columns. 
-turtle_sales2 <- dplyr::select(turtle_sales, -Ranking, -Year, -Genre, -Publisher)
+turtle_sales2 <- dplyr::select(turtle_sales, -Ranking, -Year, -Genre, 
+                               -Publisher)
 
 # View the data frame.
 view(turtle_sales2)
@@ -324,7 +325,8 @@ Q_EU[2]+1.5*iqr_EU # Upper Range.
 Q_EU[1]-1.5*iqr_EU # Lower Range.
 
 
-Q_Global <- quantile(df_sales$sum_Global_Sales, probs=c(.25, .75), na.rm = FALSE)
+Q_Global <- quantile(df_sales$sum_Global_Sales, probs=c(.25, .75), 
+                     na.rm = FALSE)
 iqr_Global <- IQR(df_sales$sum_Global_Sales)
 
 Q_Global[2]+1.5*iqr_Global # Upper Range.  
@@ -639,29 +641,29 @@ turtle_pred_test
 # 5. Observations and insights
 # Your observations and insights here...
 
-# Simple Linear Regression Models had the following R-Squared values:
-# sum_NA_Sales as predictor: 0.8395
-# sum_EU_Sales as predictor: 0.7201
-# Slight pattern on residuals for sum_EU_Sales simple linear regression model,
-# but no clear pattern on residuals for sum_NA_Sales model.
+## Simple Linear Regression Models had the following R-Squared values:
+## sum_NA_Sales as predictor: 0.8395
+## sum_EU_Sales as predictor: 0.7201
+## Slight pattern on residuals for sum_EU_Sales simple linear regression model,
+## but no clear pattern on residuals for sum_NA_Sales model.
 
-# Neither of the simple linear regression models seem to be adequate
-# as shown by the line-of-best-fits which are not in line with data points
-# at all.
+## Neither of the simple linear regression models seem to be adequate
+## as shown by the line-of-best-fits which are not in line with data points
+## at all.
 
-# Multiple Linear Regression Model using both sum of NA and EU sales had
-# adjusted R-Squared value of 0.9664 which is an extremely good fit.
+## Multiple Linear Regression Model using both sum of NA and EU sales had
+## adjusted R-Squared value of 0.9664 which is an extremely good fit.
 
-# Predictions were then made using the Multiple Linear Regression Model to test
-# accuracy.
-# Predicted values vs Observed values shown below:
-# 68.06 : 67.85
-# 7.36 : 6.04
-# 4.91 : 4.32
-# 4.76 : 3.53
-# 26.63 : 23.21
+## Predictions were then made using the Multiple Linear Regression Model to test
+## accuracy.
+## Predicted values vs Observed values shown below:
+## 68.06 : 67.85
+## 7.36 : 6.04
+## 4.91 : 4.32
+## 4.76 : 3.53
+## 26.63 : 23.21
 
-# The predicted values are relatively close to the observed values.
+## The predicted values are relatively close to the observed values.
 
 ###############################################################################
 ###############################################################################
