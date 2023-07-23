@@ -58,7 +58,7 @@ EU - NA: 0.62
 
 Simple Linear Regression Models had the following R-Squared values:\
 sum_NA_Sales as predictor: 0.8395\
-sum_EU_Sales as predictor: 0.7201\
+sum_EU_Sales as predictor: 0.7201
 
 Slight pattern on residuals for sum_EU_Sales simple linear regression model, but no clear pattern on residuals for sum_NA_Sales model.
 
