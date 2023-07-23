@@ -56,9 +56,9 @@ EU - NA: 0.62
 
 ## Assignment 6 insights and summaries:
 
-Simple Linear Regression Models had the following R-Squared values:
-sum_NA_Sales as predictor: 0.8395
-sum_EU_Sales as predictor: 0.7201
+Simple Linear Regression Models had the following R-Squared values:\
+sum_NA_Sales as predictor: 0.8395\
+sum_EU_Sales as predictor: 0.7201\
 
 Slight pattern on residuals for sum_EU_Sales simple linear regression model, but no clear pattern on residuals for sum_NA_Sales model.
 
@@ -67,11 +67,11 @@ Neither of the simple linear regression models seem to be adequate as shown by t
 Multiple Linear Regression Model using both sum of NA and EU sales had adjusted R-Squared value of 0.9664 which is an extremely good fit.
 
 Predictions were then made using the Multiple Linear Regression Model to test accuracy.\
-Predicted values vs Observed values shown below:
-68.06 : 67.85
-7.36 : 6.04
-4.91 : 4.32
-4.76 : 3.53
-26.63 : 23.21
+Predicted values vs Observed values shown below:\
+68.06 : 67.85\
+7.36 : 6.04\
+4.91 : 4.32\
+4.76 : 3.53\
+26.63 : 23.21\
 
 The predicted values are relatively close to the observed values.
