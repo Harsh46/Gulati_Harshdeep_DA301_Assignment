@@ -72,6 +72,6 @@ Predicted values vs Observed values shown below:\
 7.36 : 6.04\
 4.91 : 4.32\
 4.76 : 3.53\
-26.63 : 23.21\
+26.63 : 23.21
 
 The predicted values are relatively close to the observed values.
