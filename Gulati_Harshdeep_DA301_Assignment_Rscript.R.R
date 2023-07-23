@@ -530,47 +530,138 @@ ggplot(data = df_sales,
 
 ###############################################################################
 
-# 1. Load and explor the data
+# 1. Load and explore the data
 # View data frame created in Week 5.
-
+view(df_sales)
 
 # Determine a summary of the data frame.
-
+summary(df_sales)
 
 ###############################################################################
 
 # 2. Create a simple linear regression model
+# Create a simple linear regression model for sum_NA_Sales
 ## 2a) Determine the correlation between columns
+cor(df_sales)
+
+# Import the psych package.
+library(psych)
+
+# Visualise the correlations
+corPlot(df_sales, cex=2)
+
 # Create a linear regression model on the original data.
+df_sales_lm_NAG <- lm(sum_Global_Sales~sum_NA_Sales,data=df_sales)
 
+# View more outputs for the model - the full regression table.
+summary(df_sales_lm_NAG)
 
+# R-Squared value of 0.8395, very good fit.
+
+# Check Residuals.
+plot(df_sales_lm_NAG$residuals)
+
+# No visible pattern of residuals, good sign.
 
 ## 2b) Create a plot (simple linear regression)
 # Basic visualisation.
+plot(df_sales$sum_Global_Sales, df_sales$sum_NA_Sales)
+coefficients(df_sales_lm_NAG)
+
+# Add line-of-best-fit.
+abline(coefficients(df_sales_lm_NAG))
 
 
+# Create a simple linear regression model for sum_EU_Sales
+# Create a linear regression model on the original data.
+df_sales_lm_EUG <- lm(sum_Global_Sales~sum_EU_Sales,data=df_sales)
+
+# View more outputs for the model - the full regression table.
+summary(df_sales_lm_EUG)
+
+# R-Squared value of 0.7201, good fit.
+
+# Check Residuals.
+plot(df_sales_lm_EUG$residuals)
+
+# Slight downwards trend on residuals but does not seem significant.
+
+## 2b) Create a plot (simple linear regression)
+# Basic visualisation.
+plot(df_sales$sum_Global_Sales, df_sales$sum_NA_Sales)
+coefficients(df_sales_lm_EUG)
+
+# Add line-of-best-fit.
+abline(coefficients(df_sales_lm_EUG))
+
+# Neither of the simple linear regression models seem to be adequate
+# as shown by the line-of-best-fits which are not in line with datapoints
+# at all.
 ###############################################################################
 
 # 3. Create a multiple linear regression model
+# Visualise the correlations
+corPlot(df_sales, cex=2)
+
 # Select only numeric columns from the original data frame.
+df_sales_mlrm = lm(sum_Global_Sales~sum_NA_Sales+sum_EU_Sales, data=df_sales)
 
+# Print the summary statistics.
+summary(df_sales_mlrm)
 
-# Multiple linear regression model.
-
+# Adjusted R-squared value of 0.9664, extremely good fit.
 
 ###############################################################################
 
 # 4. Predictions based on given values
 # Compare with observed values for a number of records.
+# Create and load new csv with test values.
+turtle_test <- read.csv(file.choose(), header=TRUE)
 
+# View the data to see observed values.
+str(turtle_test)
 
+# Create a new object and specify the predict function.
+turtle_pred_test = predict(df_sales_mlrm, newdata=turtle_test,
+                      interval='confidence')
 
+# Print the object.
+turtle_pred_test
+
+# Predicted values vs Observed values:
+# 68.06 : 67.85
+# 7.36 : 6.04
+# 4.91 : 4.32
+# 4.76 : 3.53
+# 26.63 : 23.21
 ###############################################################################
 
 # 5. Observations and insights
 # Your observations and insights here...
 
+# Simple Linear Regression Models had the following R-Squared values:
+# sum_NA_Sales as predictor: 0.8395
+# sum_EU_Sales as predictor: 0.7201
+# Slight pattern on residuals for sum_EU_Sales simple linear regression model,
+# but no clear pattern on residuals for sum_NA_Sales model.
 
+# Neither of the simple linear regression models seem to be adequate
+# as shown by the line-of-best-fits which are not in line with data points
+# at all.
+
+# Multiple Linear Regression Model using both sum of NA and EU sales had
+# adjusted R-Squared value of 0.9664 which is an extremely good fit.
+
+# Predictions were then made using the Multiple Linear Regression Model to test
+# accuracy.
+# Predicted values vs Observed values shown below:
+# 68.06 : 67.85
+# 7.36 : 6.04
+# 4.91 : 4.32
+# 4.76 : 3.53
+# 26.63 : 23.21
+
+# The predicted values are relatively close to the observed values.
 
 ###############################################################################
 ###############################################################################
