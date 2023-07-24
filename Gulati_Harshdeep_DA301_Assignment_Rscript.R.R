@@ -422,9 +422,9 @@ ggplot(data = df_sales,
               size = 1.0) +
   
 # Add labels for axis, title and caption.
-labs(y = "Sum of Global Sales",
+labs(y = "Sum of EU Sales",
      x = "Sum of NA Sales",
-     title = "Correlation Between Sales Globally and in NA",
+     title = "Correlation Between Sales in NA and Globally",
      caption = "Source: Turtle Games") 
 
 
@@ -444,7 +444,7 @@ ggplot(data = df_sales,
   # Add labels for axis, title and caption.
   labs(y = "Sum of Global Sales",
        x = "Sum of EU Sales",
-       title = "Correlation Between Sales Globally and in the EU",
+       title = "Correlation Between Sales in the EU and Globally",
        caption = "Source: Turtle Games") 
 
 
@@ -463,7 +463,7 @@ ggplot(data = df_sales,
               size = 1.0) +
   
   # Add labels for axis, title and caption.
-  labs(y = "Sum of Global Sales",
+  labs(y = "Sum of EU Sales",
        x = "Sum of NA Sales",
        title = "Correlation Between Sales in the EU and in NA",
        caption = "Source: Turtle Games") 
@@ -590,7 +590,7 @@ plot(df_sales_lm_EUG$residuals)
 
 ## 2b) Create a plot (simple linear regression)
 # Basic visualisation.
-plot(df_sales$sum_Global_Sales, df_sales$sum_NA_Sales)
+plot(df_sales$sum_Global_Sales, df_sales$sum_EU_Sales)
 coefficients(df_sales_lm_EUG)
 
 # Add line-of-best-fit.
