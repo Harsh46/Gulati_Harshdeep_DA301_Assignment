@@ -16,7 +16,7 @@ Insignificant evidence to suggest relationship between age and loyalty (p>0.05),
 
 *Created Multiple Regression model with spending_score and remuneration using MLR:*\
 Significant evidence to suggest relationship between spending, remuneration and loyalty (p<0.05), CI did not have 0.\
-Adjusted R-Squared tells us that the MLR model of multiple regression explains 82.3% of the variance.\
+Adjusted R-Squared tells us that the MLR model explains 82.3% of the variance.\
 There is insignificant evidence to suggest multicollinearity
 
 
